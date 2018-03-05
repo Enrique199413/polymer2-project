@@ -20,18 +20,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
 <link rel="import" href="my-icons.html">
 
-<link rel="lazy-import" href="my-view1.html">
-<link rel="lazy-import" href="my-view2.html">
-<link rel="lazy-import" href="my-view3.html">
+<link rel="lazy-import" href="my-about.html">
+<link rel="lazy-import" href="my-career.html">
+<link rel="lazy-import" href="my-hobbies.html">
 <link rel="lazy-import" href="my-view404.html">
 
 <dom-module id="my-app">
   <template>
     <style>
       :host {
-        --app-primary-color: #4285f4;
+        --app-primary-color: #1565C0;
         --app-secondary-color: black;
 
         display: block;
@@ -62,9 +66,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         line-height: 40px;
       }
 
+      @media only screen and (max-height: 500px) {
+        iron-selector {
+          overflow: auto;
+          height: 5rem;
+          display: block;
+        }
+      }
+
       .drawer-list a.iron-selected {
         color: black;
         font-weight: bold;
+      }
+
+      paper-card {
+        --paper-card-header-color: white;
+        --paper-card-content: {
+          padding: 0;
+        }
+      }
+
+      a {
+        outline: none;
       }
     </style>
 
@@ -80,15 +103,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}">
     </app-route>
 
-    <app-drawer-layout fullbleed narrow="{{narrow}}">
+    <app-drawer-layout fullbleed narrow="{{narrow}}" force-narrow>
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-        <app-toolbar>Menu</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="[[rootPath]]view1">View One</a>
-          <a name="view2" href="[[rootPath]]view2">View Two</a>
-          <a name="view3" href="[[rootPath]]view3">View Three</a>
-        </iron-selector>
+        <paper-card image="images/assets/me.jpg" heading="EnriqueLC" elevation="0">
+          <div class="card-content">
+            <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+              <a name="about" href="[[rootPath]]about">Acerca de mí</a>
+              <a name="career" href="[[rootPath]]career">Carrera</a>
+              <a name="hobbies" href="[[rootPath]]hobbies">Hoobies</a>
+            </iron-selector>
+          </div>
+        </paper-card>
       </app-drawer>
 
       <!-- Main content -->
@@ -97,7 +123,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>[[semiTitle]]</div>
           </app-toolbar>
         </app-header>
 
@@ -106,9 +132,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
+          <my-about name="about"></my-about>
+          <my-career name="career"></my-career>
+          <my-hobbies name="hobbies"></my-hobbies>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>
@@ -117,55 +143,73 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     class MyApp extends Polymer.Element {
-      static get is() { return 'my-app'; }
+      static get is() { return 'my-app' }
 
       static get properties() {
         return {
           page: {
             type: String,
             reflectToAttribute: true,
-            observer: '_pageChanged',
+            observer: '_pageChanged'
           },
           routeData: Object,
           subroute: String,
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
-        };
+        }
       }
 
       static get observers() {
         return [
-          '_routePageChanged(routeData.page)',
-        ];
+          '_routePageChanged(routeData.page)'
+        ]
       }
 
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'view1';
+        this.page = page || 'about'
+        switch (this.page) {
+          case 'about':
+            this.updateStyles({'--app-primary-color': '#01579B'});
+            this.semiTitle = 'Acerca de mí'
+            break
+          case 'career':
+            this.updateStyles({'--app-primary-color': '#0097A7'});
+            this.semiTitle = 'Carrera'
+            break
+          case 'hobbies':
+            this.updateStyles({'--app-primary-color': '#E65100'});
+            this.semiTitle = 'Gustos'
+            break
+          default:
+            this.updateStyles({'--app-primary-color': '#D50000'});
+            this.semiTitle = 'Error 404'
+            break
+        }
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
-          this.$.drawer.close();
+          this.$.drawer.close()
         }
       }
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html')
         Polymer.importHref(
-            resolvedPageUrl,
-            null,
-            this._showPage404.bind(this),
-            true);
+          resolvedPageUrl,
+          null,
+          this._showPage404.bind(this),
+          true)
       }
 
       _showPage404() {
-        this.page = 'view404';
+        this.page = 'view404'
       }
     }
 
-    window.customElements.define(MyApp.is, MyApp);
+    window.customElements.define(MyApp.is, MyApp)
   </script>
 </dom-module>

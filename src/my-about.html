@@ -1,0 +1,104 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="mobile-shared-styles.html">
+
+<dom-module id="my-about">
+  <template>
+    <style include="shared-mobile-styles"></style>
+    <style include="shared-styles">
+      :host {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .image {
+        width: 150px;
+        height: 150px;
+        background-image: url("../images/assets/me.jpg");
+        background-size: cover;
+        border-radius: 50%;
+        background-position-y: -25px;
+        margin-bottom: -5rem;
+        z-index: 1;
+        margin-top: 1rem;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .inner-container {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+
+    <div class="image"></div>
+    <paper-card heading="23 años y contando, actualmente desarrollador en Sngular" main-card>
+      <div class="card-content">
+        <div class="container">
+          <div class="sub-header">En mi trabajo</div>
+          <div class="paper-font-body1">Amante del desarrollo Web, me fascina codificar y dar buenas soluciones con mi equipo de trabajo. He trabajado remotamente y me encanta escuchar las opiniones de mis compañeros de trabajo, me gusta enseñar lo que he aprendido para fortalecer mis conocimientos. Me gusta interactuar con nuevas tecnologías para conocer sus debilidades y como aplicar lo bueno de cada una en casos reales.</div>
+        </div>
+        <div class="container">
+          <div class="sub-header">En mi vida personal</div>
+          <div class="paper-font-body1">Me gusta salir con los amigos y estar conviviendo con la gente. A veces juego LOL(League of Legends) o City Skylines. Regularmente me quedo en casa a estar aprendiendo algo o a simplemente ver la vida pasar, amo comprar cosas por Amazon y una de mis grandes pasiones es enseñar a la gente lo que he aprendido a lo largo de esta corta vida.</div>
+        </div>
+        <div class="container">
+          <div class="inner-container">
+            <a href="https://github.com/Enrique199413" tabindex="-1" target="_blank">
+              <div style="display:inline-block">
+                <paper-icon-button src="images/assets/github-logo.png"></paper-icon-button>
+                <paper-tooltip>GitHub</paper-tooltip>
+              </div>
+            </a>
+            <a href="https://twitter.com/_EnriqueLC" tabindex="-1" target="_blank">
+              <div style="display: inline-block">
+                <paper-icon-button src="images/assets/twitter-logo.png"></paper-icon-button>
+                <paper-tooltip>Twitter</paper-tooltip>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/enrique_lopez_callejas" tabindex="-1" target="_blank">
+              <div style="display: inline-block">
+                <paper-icon-button src="images/assets/instagram-logo.png"></paper-icon-button>
+                <paper-tooltip>Instagram</paper-tooltip>
+              </div>
+            </a>
+            <a href="https://www.facebook.com/Enrique.Lopez.Callejas" tabindex="-1" target="_blank">
+              <div style="display: inline-block">
+                <paper-icon-button src="images/assets/fb-logo.png"></paper-icon-button>
+                <paper-tooltip>Facebook</paper-tooltip>
+              </div>
+            </a>
+            <a href="https://www.linkedin.com/in/enriquelc/" tabindex="-1" target="_blank">
+              <div style="display: inline-block">
+                <paper-icon-button src="images/assets/linkedin-logo.png"></paper-icon-button>
+                <paper-tooltip>LinkedIn</paper-tooltip>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    class MyAbout extends Polymer.Element {
+      static get is() { return 'my-about' }
+    }
+
+    window.customElements.define(MyAbout.is, MyAbout)
+  </script>
+</dom-module>

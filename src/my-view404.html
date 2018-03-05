@@ -14,27 +14,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style>
       :host {
-        display: block;
-
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 10px 20px;
+        flex-direction: column;
       }
     </style>
 
-    Oops you hit a 404. <a href="[[rootPath]]">Head back to home.</a>
+    <p>Baia baia tenemos un código de error 404.</p>
+    <p>
+      <a href="[[rootPath]]">Regresa a casa muchacho</a>
+    </p>
   </template>
 
   <script>
     class MyView404 extends Polymer.Element {
-      static get is() { return 'my-view404'; }
+      static get is() { return 'my-view404' }
+
       static get properties() {
         return {
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
-        };
+        }
       }
     }
 
-    window.customElements.define(MyView404.is, MyView404);
+    window.customElements.define(MyView404.is, MyView404)
   </script>
 </dom-module>

@@ -1,0 +1,149 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="mobile-shared-styles.html">
+
+<dom-module id="my-career">
+  <template>
+    <style include="shared-mobile-styles"></style>
+    <style include="shared-styles">
+      :host {
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .small-card > img {
+        width: 100px;
+      }
+
+      .small-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .grid-card {
+        display: flex;
+        align-content: center;
+        width: 100%;
+        justify-content: space-around;
+        margin: 1rem 0;
+        flex-wrap: wrap;
+      }
+
+      .margin {
+        margin: 2rem 0;
+      }
+    </style>
+
+    <paper-card heading="Simplemente amo mi trabajo" main-card>
+      <div class="card-content">
+        <div class="container">
+          <div class="sub-header">Introducción</div>
+          <div class="paper-font-body1">Hace ya cinco años que empezó esto llamado "trabajar profesionalmente", "rifarse el físico", "ser bombero" y creanme que no ha sido nada fácil, he tenido buenos y malos momentos, de todo hay que aprender y orgullosamente puedo decir que no me arrepiento de nada.</div>
+          <div class="paper-font-body1">Todos los días aprendemos algo nuevo y en esta carrera aprendemos más y más cada segundo de nuestra existencia</div>
+        </div>
+        <div class="container">
+          <div class="sub-header">Experiencia</div>
+          <div class="paper-font-body1">Me ha tocado conocer y aprender varias tecnologías, no me da pena aceptar que soy un amante del sistema operativo Windows.</div>
+          <div class="paper-font-body1 margin">Estas son algunas de las tecnologías que puedo decir que me rifo el físico:</div>
+          <div class="grid-card">
+
+            <div class="small-card">
+              <img src="images/assets/polymer-logo.png" alt="Polymer 1 y 2"/>
+              <paper-tooltip>Polymer 1 y 2</paper-tooltip>
+            </div>
+
+            <div class="small-card">
+              <img src="images/assets/aurelia-logo.png" alt="AureliaJS"/>
+              <paper-tooltip>AureliaJS</paper-tooltip>
+            </div>
+
+            <div class="small-card">
+              <img src="images/assets/angular-logo.png" alt="AngularJS 1"/>
+              <paper-tooltip>AngularJS 1</paper-tooltip>
+            </div>
+
+            <div class="small-card">
+              <img src="images/assets/node-logo.jpg" alt="NodeJS"/>
+              <paper-tooltip>NodeJS</paper-tooltip>
+            </div>
+          </div>
+          <div class="paper-font-body1 margin">Evidentemente conozco estas para poder manejar las anteriores:</div>
+          <div class="grid-card">
+
+            <div class="small-card">
+              <img src="images/assets/css-logo.jpg" alt="CSS"/>
+              <paper-tooltip>CSS</paper-tooltip>
+            </div>
+
+
+            <div class="small-card">
+              <img src="images/assets/html-logo.jpg" alt="HTML5"/>
+              <paper-tooltip>HTML5</paper-tooltip>
+            </div>
+
+
+            <div class="small-card">
+              <img src="images/assets/javascript-logo.png" alt="JS"/>
+              <paper-tooltip>JS</paper-tooltip>
+            </div>
+
+          </div>
+          <div class="paper-font-body1 margin">De estos puedo decir que los conozco y he trabajado con ellos:</div>
+          <div class="grid-card">
+
+            <div class="small-card">
+              <img src="images/assets/vuejs-logo.png" alt="VueJS"/>
+              <paper-tooltip>VueJS</paper-tooltip>
+            </div>
+
+
+            <div class="small-card">
+              <img src="images/assets/mongodb-logo.png" alt="MongoDB"/>
+              <paper-tooltip>MongoDB</paper-tooltip>
+            </div>
+
+
+            <div class="small-card">
+              <img src="images/assets/java-logo.png" alt="Java 7"/>
+              <paper-tooltip>Java 7</paper-tooltip>
+            </div>
+
+
+            <div class="small-card">
+              <img src="images/assets/c-sharp-logo.jpg" alt="C#"/>
+              <paper-tooltip>C#</paper-tooltip>
+            </div>
+
+
+            <div class="small-card">
+              <img src="images/assets/sql-server.svg" alt="SQL Server 2008 y 2012"/>
+              <paper-tooltip>SQL Server 2008 y 2012</paper-tooltip>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    class MyCareer extends Polymer.Element {
+      static get is() { return 'my-career' }
+    }
+
+    window.customElements.define(MyCareer.is, MyCareer)
+  </script>
+</dom-module>
